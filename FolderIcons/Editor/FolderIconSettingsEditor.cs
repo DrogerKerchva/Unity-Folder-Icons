@@ -351,7 +351,12 @@ namespace FolderIcons
             if (GUILayout.Button ("Save Texture"))
             {
                 string fullPath = $"{savePath}/{textureName}.png";
-                SaveTextureAsPNG (previewTexture, fullPath);
+                
+                previewTexture.name = textureName;
+                AssetDatabase.AddObjectToAsset(previewTexture, target);
+
+                AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(target), ImportAssetOptions.ForceUpdate);
+                AssetDatabase.Refresh();
             }
         }
 
